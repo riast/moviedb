@@ -12,6 +12,11 @@ import { Movie } from '../domains/Movie';
 import * as Colors from '../theme/Colors';
 import { HeaderStyle } from '../theme/HeaderStyles';
 import { FontSizes, Margins } from '../theme/Sizes';
+import {
+  ReleaseDateSourceFormat,
+  ReleaseDateHumanFormat,
+  ReleaseDateYearOnlyFormat,
+} from '../constants/DateFormats';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -27,7 +32,7 @@ export default class MovieDetails extends React.Component<Props, any> {
   render() {
     let movie: Movie = this.props.navigation.getParam('movie');
 
-    let hasReleased = moment(movie.release_date, 'YYYY-MM-DD').isBefore(moment.now());
+    let hasReleased = moment(movie.release_date, ReleaseDateSourceFormat).isBefore(moment.now());
 
     return (
       <Fragment>
@@ -47,7 +52,11 @@ export default class MovieDetails extends React.Component<Props, any> {
             <View style={{ margin: Margins.default }}>
               <Text style={{ fontSize: FontSizes.large }}>{movie.title}</Text>
 
-              <Text>{moment(movie.release_date, 'YYYY-MM-DD').format('YYYY')}</Text>
+              <Text>
+                {moment(movie.release_date, ReleaseDateSourceFormat).format(
+                  ReleaseDateYearOnlyFormat,
+                )}
+              </Text>
             </View>
 
             <Divider></Divider>
@@ -56,7 +65,11 @@ export default class MovieDetails extends React.Component<Props, any> {
                 {hasReleased && <Text style={{ fontSize: 18 }}>Released</Text>}
                 {!hasReleased && <Text style={{ fontSize: 18 }}>Coming Soon</Text>}
 
-                <Text>{moment(movie.release_date, 'YYYY-MM-DD').format('MMMM DD, YYYY')}</Text>
+                <Text>
+                  {moment(movie.release_date, ReleaseDateSourceFormat).format(
+                    ReleaseDateHumanFormat,
+                  )}
+                </Text>
               </View>
 
               <View style={{ alignItems: 'flex-end', flex: 0.5 }}>

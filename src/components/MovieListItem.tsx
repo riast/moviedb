@@ -6,6 +6,7 @@ import moment from 'moment';
 import { TouchableOpacity } from 'react-native';
 import { Movie } from '../domains/Movie';
 import NavigationHelper from '../helpers/NavigationHelper';
+import { ReleaseDateSourceFormat, ReleaseDateHumanFormat } from '../constants/DateFormats';
 export const MovieListItem = ({ item }: { item: Movie }) => (
   <TouchableOpacity
     onPress={() => {
@@ -29,7 +30,7 @@ export const MovieListItem = ({ item }: { item: Movie }) => (
       />
 
       <Text style={{ marginBottom: 5, marginTop: 15, textAlign: 'center' }}>
-        {moment(item.release_date, 'YYYY-MM-DD').format('MMM DD, YYYY')}
+        {moment(item.release_date, ReleaseDateSourceFormat).format(ReleaseDateHumanFormat)}
       </Text>
     </Card>
   </TouchableOpacity>
