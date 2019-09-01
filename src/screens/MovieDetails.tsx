@@ -40,6 +40,8 @@ export default class MovieDetails extends React.Component<Props, any> {
 
         <SafeAreaView>
           <ScrollView style={styles.scrollView}>
+            {/* Banner area */}
+
             <FastImage
               style={{ height: 200, flex: 1 }}
               source={{
@@ -48,7 +50,6 @@ export default class MovieDetails extends React.Component<Props, any> {
               }}
               resizeMode={FastImage.resizeMode.cover}
             />
-
             <View style={{ margin: Margins.default }}>
               <Text style={{ fontSize: FontSizes.large }}>{movie.title}</Text>
 
@@ -58,8 +59,9 @@ export default class MovieDetails extends React.Component<Props, any> {
                 )}
               </Text>
             </View>
-
             <Divider></Divider>
+            {/* Release date and rating area */}
+
             <View style={styles.releaseSection}>
               <View style={{ flex: 0.5 }}>
                 {hasReleased && <Text style={{ fontSize: 18 }}>Released</Text>}
@@ -81,6 +83,8 @@ export default class MovieDetails extends React.Component<Props, any> {
               </View>
             </View>
             <Divider></Divider>
+
+            {/* Poster and overview area */}
 
             <View style={{ flexDirection: 'row', margin: Margins.default, flex: 1 }}>
               <FastImage
