@@ -18,5 +18,6 @@ Running on android:
 On the root of the project:
 ```
 yarn
-react-native run-android
+react-native run-android --variant=release
+
 ```
