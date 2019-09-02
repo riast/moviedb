@@ -17,6 +17,7 @@ import {
   ReleaseDateHumanFormat,
   ReleaseDateYearOnlyFormat,
 } from '../constants/DateFormats';
+import { ImageBannerStyle } from '../theme/CommonStyles';
 
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -43,7 +44,7 @@ export default class MovieDetails extends React.Component<Props, any> {
             {/* Banner area */}
 
             <FastImage
-              style={{ height: 200, flex: 1 }}
+              style={ImageBannerStyle}
               source={{
                 uri: ImagePathW1280 + movie.backdrop_path,
                 priority: FastImage.priority.normal,
@@ -64,8 +65,8 @@ export default class MovieDetails extends React.Component<Props, any> {
 
             <View style={styles.releaseSection}>
               <View style={{ flex: 0.5 }}>
-                {hasReleased && <Text style={{ fontSize: 18 }}>Released</Text>}
-                {!hasReleased && <Text style={{ fontSize: 18 }}>Coming Soon</Text>}
+                {hasReleased && <Text style={{ fontSize: FontSizes.medium }}>Released</Text>}
+                {!hasReleased && <Text style={{ fontSize: FontSizes.medium }}>Coming Soon</Text>}
 
                 <Text>
                   {moment(movie.release_date, ReleaseDateSourceFormat).format(
@@ -74,11 +75,8 @@ export default class MovieDetails extends React.Component<Props, any> {
                 </Text>
               </View>
 
-              <View style={{ alignItems: 'flex-end', flex: 0.5 }}>
-                <Icon
-                  containerStyle={{ width: 40, justifyContent: 'center' }}
-                  color="red"
-                  name="star"></Icon>
+              <View style={styles.rating}>
+                <Icon containerStyle={styles.starIconContainer} color="red" name="star"></Icon>
                 <Text>{movie.vote_average}/10</Text>
               </View>
             </View>
@@ -86,18 +84,16 @@ export default class MovieDetails extends React.Component<Props, any> {
 
             {/* Poster and overview area */}
 
-            <View style={{ flexDirection: 'row', margin: Margins.default, flex: 1 }}>
+            <View style={styles.posterSection}>
               <FastImage
-                style={{ height: 200, width: 130 }}
+                style={styles.posterImage}
                 source={{
                   uri: ImagePathW500 + movie.poster_path,
                   priority: FastImage.priority.normal,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
               />
-              <Text style={{ marginLeft: Margins.default, flex: 1, textAlign: 'left' }}>
-                {movie.overview}
-              </Text>
+              <Text style={styles.overviewText}>{movie.overview}</Text>
             </View>
           </ScrollView>
         </SafeAreaView>
@@ -120,4 +116,9 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
   },
+  rating: { alignItems: 'flex-end', flex: 0.5 },
+  starIconContainer: { width: 40, justifyContent: 'center' },
+  posterSection: { flexDirection: 'row', margin: Margins.default, flex: 1 },
+  posterImage: { height: 200, width: 130 },
+  overviewText: { marginLeft: Margins.default, flex: 1, textAlign: 'left' },
 });

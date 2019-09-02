@@ -7,6 +7,7 @@ import { TouchableOpacity } from 'react-native';
 import { Movie } from '../domains/Movie';
 import NavigationHelper from '../helpers/NavigationHelper';
 import { ReleaseDateSourceFormat, ReleaseDateHumanFormat } from '../constants/DateFormats';
+import { ImageBannerStyle } from '../theme/CommonStyles';
 export const MovieListItem = ({ item }: { item: Movie }) => (
   <TouchableOpacity
     onPress={() => {
@@ -21,7 +22,7 @@ export const MovieListItem = ({ item }: { item: Movie }) => (
       containerStyle={{ paddingLeft: 0, paddingRight: 0 }}
       dividerStyle={{ marginBottom: 0 }}>
       <FastImage
-        style={{ height: 200, flex: 1 }}
+        style={ImageBannerStyle}
         source={{
           uri: ImagePathW500 + item.backdrop_path,
           priority: FastImage.priority.normal,

@@ -42,7 +42,7 @@ export async function getMovies(
   if ('data' in response && 'results' in response.data) {
     let movies: Movie[] = response.data.results.map((movie: JSON) => deserialize(Movie, movie));
 
-    console.log(movies);
+    console.log(response.data);
     return movies;
   } else {
     throw Error('Error with response');
